@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f7fb" />
+    <title>Campus Notice Board</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Campus Notice Board home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>Campus<span class="brand-light"> / Notices</span></span>
+      </a>
+      <div class="topbar-right">
+        <span class="today-label" id="todayLabel"></span>
+        <button class="staff-toggle" id="staffToggle" type="button" aria-expanded="false">
+          <span aria-hidden="true">✦</span> Staff tools
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="welcome">
+        <div class="welcome-copy">
+          <p class="eyebrow">YOUR CAMPUS, IN THE KNOW</p>
+          <h1>Notice board<span>.</span></h1>
+          <p class="welcome-description">Announcements, deadlines, and updates from across campus—all in one place.</p>
+        </div>
+        <div class="welcome-art" aria-hidden="true">
+          <div class="art-paper"><span></span><span></span><span></span><i>!</i></div>
+          <div class="art-dot dot-one"></div><div class="art-dot dot-two"></div>
+        </div>
+      </section>
+
+      <section class="summary" aria-label="Notice board summary">
+        <div class="summary-item"><span class="summary-icon icon-blue" aria-hidden="true">▤</span><div><strong id="noticeCount">0</strong><span>Published notices</span></div></div>
+        <div class="summary-item"><span class="summary-icon icon-orange" aria-hidden="true">◷</span><div><strong id="deadlineCount">0</strong><span>Upcoming deadlines</span></div></div>
+        <div class="summary-note"><span class="live-dot"></span> Keeping you up to date</div>
+      </section>
+
+      <section class="staff-panel" id="staffPanel" hidden>
+        <div class="panel-heading">
+          <div><p class="eyebrow">NOTICE MANAGEMENT</p><h2 id="formHeading">Create a notice</h2></div>
+          <button class="close-panel" id="closePanel" type="button" aria-label="Close staff tools">×</button>
+        </div>
+        <form id="noticeForm">
+          <input type="hidden" id="noticeId" />
+          <div class="form-grid">
+            <label class="field field-wide">Notice title<input id="noticeTitle" type="text" maxlength="100" placeholder="e.g. Library hours during exams" required /></label>
+            <label class="field">Category<select id="noticeCategory" required><option value="Academic">Academic</option><option value="Events">Events</option><option value="Deadlines">Deadlines</option><option value="Facilities">Facilities</option><option value="General">General</option></select></label>
+            <label class="field">Publication date<input id="noticeDate" type="date" required /></label>
+            <label class="field">Deadline (optional)<input id="noticeDeadline" type="date" /></label>
+            <label class="field checkbox-field"><input id="noticePinned" type="checkbox" /> Mark as important</label>
+            <label class="field field-wide">Announcement<textarea id="noticeBody" rows="4" maxlength="1000" placeholder="Share the details students need to know…" required></textarea></label>
+          </div>
+          <div class="form-actions"><button class="button button-quiet" id="cancelEdit" type="button" hidden>Cancel edit</button><button class="button button-primary" id="saveNotice" type="submit">Publish notice</button></div>
+        </form>
+      </section>
+
+      <section class="notices-section" aria-labelledby="noticesHeading">
+        <div class="section-heading">
+          <div><p class="eyebrow">CAMPUS UPDATES</p><h2 id="noticesHeading">Latest notices <span class="heading-count" id="headingCount">0</span></h2></div>
+          <div class="filters">
+            <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search notices" aria-label="Search notices" /></label>
+            <select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select>
+            <select id="dateSort" aria-label="Sort by publication date"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
+          </div>
+        </div>
+        <div class="category-chips" id="categoryChips" aria-label="Browse by category"></div>
+        <div class="notice-grid" id="noticeList" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState" hidden><span aria-hidden="true">⌕</span><h3>No notices found</h3><p>Try a different search or category filter.</p><button class="button button-quiet" id="clearFilters" type="button">Clear filters</button></div>
+      </section>
+    </main>
+    <footer><span class="footer-mark">C</span><span>Campus Notice Board</span><span class="footer-right">Stay connected. Stay informed.</span></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
